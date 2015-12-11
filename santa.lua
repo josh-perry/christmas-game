@@ -13,11 +13,15 @@ function Santa:initialize()
 
   self.world_speed = 256 -- Pixels/sec
   self.screen_speed = 600
+
+  self.sprite = love.graphics.newImage("data/graphics/santa.png")
 end
 
 function Santa:draw()
-  love.graphics.setColor(255, 100, 100)
-  love.graphics.rectangle("fill", self.screen_space_x, self.screen_space_y, self.width, self.height)
+  love.graphics.setColor(255, 255, 255)
+  love.graphics.draw(self.sprite, self.screen_space_x, self.screen_space_y)
+  --love.graphics.setColor(255, 100, 100)
+  --love.graphics.rectangle("fill", self.screen_space_x, self.screen_space_y, self.width, self.height)
 end
 
 function Santa:update(dt)

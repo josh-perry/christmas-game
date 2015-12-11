@@ -22,18 +22,27 @@ function Present:initialize(x, y, house_id)
   self.target_house = houses[self.house_id]
 
   self.alive_time = 0
+
+  self.sprite = love.graphics.newImage("data/graphics/present.png")
+  self.color = {math.random(100, 255), math.random(100, 255), math.random(100, 255)}
+
+  self.throw_target_x = math.random(-16, 16)
+  self.throw_target_y = math.random(-16, -64)
 end
 
 function Present:draw()
-  love.graphics.setColor(150, 255, 150)
-  love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+  -- love.graphics.setColor(150, 255, 150)
+  -- love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+
+  love.graphics.setColor(self.color)
+  love.graphics.draw(self.sprite, self.x, self.y)
 end
 
 function Present:update(dt, move_speed)
   self.alive_time = self.alive_time + dt
 
-  local toX = self.x
-  local toY = self.y - 32
+  local toX = self.x + self.throw_target_x
+  local toY = self.y + self.throw_target_y
 
   if self.alive_time > 0.2 then
     -- Move toward house
