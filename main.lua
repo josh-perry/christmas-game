@@ -4,6 +4,7 @@
 require("santa")
 require("house")
 require("present")
+require("reindeer")
 
 -- etc.
 require("BoundingBox")
@@ -66,7 +67,7 @@ end
 function spawn_houses()
   houses = {}
   local house_spacing = 10
-  for i = 1, 10 do
+  for i = 1, 30 do
     h = House:new()
     h.house_spacing = 10
     h.y = screen_height - h.height
