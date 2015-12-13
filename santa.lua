@@ -12,6 +12,12 @@ function Santa:initialize()
   self.screen_speed = 600
 
   self.sprite = love.graphics.newImage("data/graphics/santa.png")
+  self.elf = {
+      sprite = love.graphics.newImage("data/graphics/elf.png"),
+      throwing = true,
+      throw_timeout = 0.1,
+      throw_timeout_cur = 0
+  }
 
   self.width = self.sprite:getWidth()
   self.height = self.sprite:getHeight()
@@ -25,6 +31,16 @@ end
 
 function Santa:draw()
   love.graphics.setColor(255, 255, 255)
+
+  local sx = 1
+  local ox = 0
+  if self.elf.throwing then
+     sx = -1
+     ox = self.elf.sprite:getWidth() + 10
+  end
+
+  love.graphics.draw(self.elf.sprite, self.screen_space_x + 36, self.screen_space_y + 16, 0, sx, 1, ox)
+
   love.graphics.draw(self.sprite, self.screen_space_x, self.screen_space_y)
 
   local leash_x = self.screen_space_x + self.width
@@ -46,6 +62,17 @@ end
 
 function Santa:update(dt)
   self.world_space_x = self.world_space_x + (self.world_speed * dt)
+
+  if self.elf.throwing then
+      self.elf.throw_timeout_cur = self.elf.throw_timeout_cur + dt
+
+      if self.elf.throw_timeout_cur >= self.elf.throw_timeout then
+          self.elf.throwing = false
+          self.elf.throw_timeout_cur = 0
+      end
+  else
+      self.elf.throw_timeout_cur = 0
+  end
 
   for i, reindeer in ipairs(self.reindeer) do
     reindeer.y = self.screen_space_y + 16

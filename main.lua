@@ -5,6 +5,7 @@ require("santa")
 require("house")
 require("present")
 require("reindeer")
+require("snow")
 
 -- etc.
 require("BoundingBox")
@@ -18,13 +19,32 @@ function love.load()
   spawn_houses()
 
   player_santa = Santa:new()
+
+  snow = {}
+
+  snow_timeout = 1
+  snow_timeout_cur = 0
 end
 
 function love.update(dt)
+    snow_timeout_cur = snow_timeout_cur + dt
+
+    if snow_timeout_cur >= snow_timeout then
+        spawn_snow()
+    end
+
   player_santa:update(dt)
 
   for i, present in ipairs(presents) do
     present:update(dt)
+  end
+
+  for i, s in ipairs(snow) do
+      s:update(dt, player_santa.world_speed)
+
+      if s.delete then
+          table.remove(snow, i)
+      end
   end
 
   for i, house in ipairs(houses) do
@@ -51,6 +71,14 @@ function love.update(dt)
   house_collisions()
 end
 
+function spawn_snow()
+    local s = Snow:new()
+    s.x = math.random(0, screen_width * 4)
+    s.y = 0 + s.height
+
+    table.insert(snow, s)
+end
+
 function love.draw()
   -- Background
   draw_sky()
@@ -62,6 +90,7 @@ function love.draw()
   -- Draw Foreground
   draw_floor()
   draw_houses()
+  draw_snow()
 end
 
 function spawn_houses()
@@ -87,9 +116,20 @@ function draw_houses()
   end
 end
 
+function draw_snow()
+    love.graphics.setColor(255, 255, 255)
+
+    for i, s in ipairs(snow) do
+        s:draw()
+    end
+end
+
 function draw_sky()
   love.graphics.setColor(8, 8, 32)
   love.graphics.rectangle("fill", 0, 0, screen_width, screen_height - 64)
+
+  love.graphics.setColor(200, 200, 200, 200)
+  love.graphics.circle("fill", 100, 100, 50)
 end
 
 function draw_floor()
@@ -112,6 +152,7 @@ function house_collisions()
       if CheckCollision(x, y, w, h, x1, y1, w1, h1) then
         house.delivered = true
 
+        player_santa.elf.throwing = true
         table.insert(presents, Present:new(player_santa.screen_space_x + (player_santa.width / 2), player_santa.screen_space_y, i))
       end
     end

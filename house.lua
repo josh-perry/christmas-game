@@ -15,11 +15,14 @@ function House:initialize()
   self.house_spacing = 0
 
   self.delivered = false
+
+  self.sprite = love.graphics.newImage("data/graphics/house1.png")
 end
 
 function House:draw()
-  love.graphics.setColor(125, 100, 75)
-  love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+  love.graphics.setColor(255, 255, 255)
+  -- love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+  love.graphics.draw(self.sprite, self.x, self.y)
 end
 
 function House:update(dt, move_speed)
