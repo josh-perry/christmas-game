@@ -21,7 +21,7 @@ end
 
 function spawn_speed_boost()
   b = SpeedBoost:new()
-  b.x = screen_width + b.width  - 100
+  b.x = screen_width + b.width + b.width
   b.y = math.random(20, screen_height - b.height - 64 - 32)
   table.insert(speed_boosts, b)
 end

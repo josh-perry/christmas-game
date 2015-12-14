@@ -47,4 +47,8 @@ function draw_debug()
   love.graphics.print("Houses:"..table.getn(houses), 10, 30)
   love.graphics.print("Speed boosts:"..table.getn(speed_boosts), 10, 40)
   love.graphics.print("Presents:"..table.getn(presents), 10, 50)
+
+  if player_santa.beam then
+      love.graphics.print("Beam:"..player_santa.beam.charge)
+  end
 end

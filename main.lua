@@ -7,6 +7,7 @@ require("present")
 require("reindeer")
 require("snow")
 require("speed_boost")
+require("beam")
 
 -- Main loop functions
 require("render")
@@ -81,4 +82,6 @@ function love.draw()
   draw_speed_boosts()
 
   love.graphics.pop()
+
+  draw_debug()
 end
