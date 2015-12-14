@@ -23,11 +23,10 @@ function Snow:initialize(x, y, house_id)
 end
 
 function Snow:draw()
-  local line_length = (player_santa.world_speed / player_santa.base_world_speed)
+  local line_length = (player_santa.world_speed / player_santa.base_world_speed) * 2
 
   love.graphics.rectangle("fill", self.x - (self.width / 2), self.y - (self.width / 2), self.width, self.height)
 
-  print(line_length)
   love.graphics.setColor(255, 255, 255, 100)
   love.graphics.line(self.x, self.y, self.x + line_length, self.y - line_length)
 end

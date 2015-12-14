@@ -16,6 +16,7 @@ require("spawn")
 -- etc.
 require("BoundingBox")
 
+zoom = 2
 screen_height = love.window.getHeight()
 screen_width = love.window.getWidth()
 
@@ -31,14 +32,19 @@ function love.load()
   snow_timeout_cur = 0
   snow_dir_change_timeout = 0
 
+  -- Boost stuff
+  speed_boost_spawn_delay = 5 -- seconds
+  speed_boost_spawn = speed_boost_spawn_delay
+
   -- Game time
   game_time = 0
-  speed_boost_spawn = 5
 
   -- Initial houses
   spawn_houses()
 
   player_santa = Santa:new()
+
+  love.window.setMode(400 * zoom, 300 * zoom)
 end
 
 function love.update(dt)
@@ -57,6 +63,9 @@ function love.update(dt)
 end
 
 function love.draw()
+  love.graphics.push()
+  love.graphics.scale(zoom)
+
   -- Background
   draw_sky()
 
@@ -70,4 +79,6 @@ function love.draw()
   draw_snow()
 
   draw_speed_boosts()
+
+  love.graphics.pop()
 end

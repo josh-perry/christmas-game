@@ -21,11 +21,11 @@ function draw_sky()
   love.graphics.rectangle("fill", 0, 0, screen_width, screen_height - 64)
 
   love.graphics.setColor(200, 200, 200, 200)
-  love.graphics.circle("fill", 100, 100, 50)
+  love.graphics.circle("fill", 50, 50, 25)
 end
 
 function draw_floor()
-  love.graphics.setColor(20, 40, 20)
+  love.graphics.setColor(200, 240, 220)
   love.graphics.rectangle("fill", 0, screen_height - 64, screen_width, 64)
 end
 
@@ -37,7 +37,6 @@ end
 
 function draw_speed_boosts()
   for i, boost in ipairs(speed_boosts) do
-    print("ok")
     boost:draw()
   end
 end

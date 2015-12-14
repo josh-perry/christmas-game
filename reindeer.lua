@@ -15,8 +15,8 @@ function Reindeer:initialize(x, y)
   local h = self.sprite:getHeight()
 
   self.animations = {
-    love.graphics.newQuad(0, 0, 64, 64, w, h),
-    love.graphics.newQuad(64, 0, 64, 64, w, h)
+    love.graphics.newQuad(0, 0, 32, 32, w, h),
+    love.graphics.newQuad(32, 0, 32, 32, w, h)
   }
 
   self.cur_frame = 1

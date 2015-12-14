@@ -39,10 +39,10 @@ function Santa:draw()
   local ox = 0
   if self.elf.throwing then
      sx = -1
-     ox = self.elf.sprite:getWidth() + 10
+     ox = self.elf.sprite:getWidth() + 5
   end
 
-  love.graphics.draw(self.elf.sprite, self.screen_space_x + 36, self.screen_space_y + 16, 0, sx, 1, ox)
+  love.graphics.draw(self.elf.sprite, self.screen_space_x + 9, self.screen_space_y + 4, 0, sx, 1, ox)
 
   love.graphics.draw(self.sprite, self.screen_space_x, self.screen_space_y)
 
@@ -52,8 +52,8 @@ function Santa:draw()
   for i, reindeer in ipairs(self.reindeer) do
     reindeer:draw()
 
-    local to_x = reindeer.x + 37 + math.random(-1, 1)
-    local to_y = reindeer.y + 27 + math.random(-1, 1)
+    local to_x = reindeer.x + 19 + math.random(-1, 1)
+    local to_y = reindeer.y + 14 + math.random(-1, 1)
 
     love.graphics.setColor(77, 77, 77)
     love.graphics.line(leash_x, leash_y, to_x, to_y)
@@ -93,8 +93,8 @@ function Santa:update(dt)
   end
 
   for i, reindeer in ipairs(self.reindeer) do
-    reindeer.y = self.screen_space_y + 16
-    reindeer.x = self.screen_space_x + self.width + (48 * i) - 32
+    reindeer.y = self.screen_space_y + 8
+    reindeer.x = self.screen_space_x + self.width + (24 * i) - 16
 
     reindeer:update(dt)
   end

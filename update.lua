@@ -36,8 +36,10 @@ function update_snow(dt)
 end
 
 function update_houses(dt)
+  local ws = player_santa.world_speed
+
   for i, house in ipairs(houses) do
-    house:update(dt, player_santa.world_speed)
+    house:update(dt, ws)
 
     if house.delete then
       table.remove(houses, i)
@@ -63,7 +65,7 @@ function update_speed_boosts(dt)
   --print(game_time)
   if game_time >= speed_boost_spawn then
     print("spawn speed boost")
-    speed_boost_spawn = speed_boost_spawn + 5 -- Every 5 seconds
+    speed_boost_spawn = speed_boost_spawn + speed_boost_spawn_delay
 
     spawn_speed_boost()
   end

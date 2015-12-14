@@ -2,13 +2,7 @@ local class = require("libs/middleclass/middleclass")
 
 House = class("House")
 
-local screen_height = love.window.getHeight()
-local screen_width = love.window.getWidth()
-
 function House:initialize()
-  self.width = 128
-  self.height = 128
-
   self.x = 0
   self.y = 0
 
@@ -17,18 +11,20 @@ function House:initialize()
   self.delivered = false
 
   self.sprite = love.graphics.newImage("data/graphics/house1.png")
+
+  self.width = self.sprite:getWidth()
+  self.height = self.sprite:getHeight()
 end
 
 function House:draw()
   love.graphics.setColor(255, 255, 255)
-  -- love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
   love.graphics.draw(self.sprite, self.x, self.y)
 end
 
 function House:update(dt, move_speed)
   self.x = self.x - (move_speed * dt)
 
-  if self.x < 0 - (self.width) then
+  if self.x < 0 - (self.width * 2) then
     self.delete = true
   end
 end

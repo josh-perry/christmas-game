@@ -1,6 +1,6 @@
 function spawn_snow()
     local s = Snow:new()
-    s.x = math.random(screen_width * 2, screen_width * (4 * (player_santa.base_world_speed / player_santa.world_speed)))
+    s.x = math.random(screen_width * 2, screen_width + (player_santa.base_world_speed / player_santa.world_speed) * 2)
     s.y = math.random(0, screen_height)
 
     table.insert(snow, s)
