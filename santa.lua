@@ -47,7 +47,7 @@ function Santa:draw()
   love.graphics.draw(self.sprite, self.screen_space_x, self.screen_space_y)
 
   local leash_x = self.screen_space_x + self.width
-  local leash_y = self.screen_space_y + (self.height / 2) - 5
+  local leash_y = self.screen_space_y + 19
 
   for i, reindeer in ipairs(self.reindeer) do
     reindeer:draw()
