@@ -16,6 +16,8 @@ function Santa:initialize()
 
   self.screen_speed = 300
 
+  self.delivered_presents = 0
+  
   self.sprite = love.graphics.newImage("data/graphics/santa.png")
   self.elf = {
       sprite = love.graphics.newImage("data/graphics/elf.png"),

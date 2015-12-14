@@ -8,6 +8,7 @@ require("reindeer")
 require("snow")
 require("speed_boost")
 require("beam")
+require("ui")
 
 -- Main loop functions
 require("render")
@@ -27,6 +28,8 @@ function love.load()
   snow = {}
   houses = {}
   speed_boosts = {}
+
+  ui = UI:new()
 
   -- Snow stuff
   snow_timeout = 1
@@ -61,6 +64,8 @@ function love.update(dt)
   -- Check collisions
   house_collisions()
   boost_collisions()
+
+  ui:update()
 end
 
 function love.draw()
@@ -81,7 +86,9 @@ function love.draw()
 
   draw_speed_boosts()
 
+  ui:draw()
+
   love.graphics.pop()
 
-  draw_debug()
+  --draw_debug()
 end

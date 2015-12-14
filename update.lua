@@ -85,6 +85,9 @@ function house_collisions()
       if CheckCollision(x, y, w, h, x1, y1, w1, h1) then
         house.delivered = true
 
+        player_santa.delivered_presents = player_santa.delivered_presents + 1
+        ui:update_presents_ui(player_santa.delivered_presents)
+
         player_santa.elf.throwing = true
         table.insert(presents, Present:new(player_santa.screen_space_x + (player_santa.width / 2), player_santa.screen_space_y, i))
       end
