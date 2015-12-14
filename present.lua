@@ -2,13 +2,7 @@ local class = require("libs/middleclass/middleclass")
 
 Present = class("Present")
 
-local screen_height = love.window.getHeight()
-local screen_width = love.window.getWidth()
-
 function Present:initialize(x, y, house_id)
-  self.width = 32
-  self.height = 32
-
   self.x = x
   self.y = y
 
@@ -26,14 +20,14 @@ function Present:initialize(x, y, house_id)
   self.sprite = love.graphics.newImage("data/graphics/present.png")
   self.color = {math.random(100, 255), math.random(100, 255), math.random(100, 255)}
 
+  self.width = self.sprite:getWidth()
+  self.height = self.sprite:getHeight()
+
   self.throw_target_x = math.random(-16, 16)
   self.throw_target_y = math.random(-16, -64)
 end
 
 function Present:draw()
-  -- love.graphics.setColor(150, 255, 150)
-  -- love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
-
   love.graphics.setColor(self.color)
   love.graphics.draw(self.sprite, self.x, self.y)
 end
@@ -58,4 +52,8 @@ function Present:update(dt, move_speed)
 
   self.x = self.x + (self.d_x * dt)
   self.y = self.y + (self.d_y * dt)
+
+  if self.x <= 0 - self.width then
+    self.delete = true
+  end
 end

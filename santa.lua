@@ -8,7 +8,10 @@ function Santa:initialize()
   self.screen_space_x = 32
   self.screen_space_y = 32
 
-  self.world_speed = 256 -- Pixels/sec
+  self.base_world_speed = 256
+  self.world_speed = self.base_world_speed -- Pixels/sec
+  self.world_deceleration = 32
+
   self.screen_speed = 600
 
   self.sprite = love.graphics.newImage("data/graphics/santa.png")
@@ -61,6 +64,14 @@ function Santa:draw()
 end
 
 function Santa:update(dt)
+  if self.world_speed >= self.base_world_speed then
+    self.world_speed = self.world_speed - (self.world_deceleration * dt)
+
+    if self.world_speed <= self.base_world_speed then
+      self.world_speed = self.base_world_speed
+    end
+  end
+
   self.world_space_x = self.world_space_x + (self.world_speed * dt)
 
   if self.elf.throwing then
@@ -72,6 +83,13 @@ function Santa:update(dt)
       end
   else
       self.elf.throw_timeout_cur = 0
+  end
+
+  movement = {"up", "down", "left", "right"}
+  for i, key in ipairs(movement) do
+    if love.keyboard.isDown(key) then
+      self:move(key, dt)
+    end
   end
 
   for i, reindeer in ipairs(self.reindeer) do
@@ -98,4 +116,8 @@ function Santa:move(direction, dt)
   if direction == "right" then
     self.screen_space_x = self.screen_space_x + (self.screen_speed * dt)
   end
+end
+
+function Santa:boost_speed()
+  self.world_speed = self.world_speed + 256
 end

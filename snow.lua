@@ -23,18 +23,16 @@ function Snow:initialize(x, y, house_id)
 end
 
 function Snow:draw()
+  local line_length = (player_santa.world_speed / player_santa.base_world_speed)
+
   love.graphics.rectangle("fill", self.x - (self.width / 2), self.y - (self.width / 2), self.width, self.height)
+
+  print(line_length)
+  love.graphics.setColor(255, 255, 255, 100)
+  love.graphics.line(self.x, self.y, self.x + line_length, self.y - line_length)
 end
 
 function Snow:update(dt, move_speed)
-  -- local angle = math.atan2((toY - self.y), (toX - self.x))
-  --
-  -- self.d_x = self.speed * math.cos(angle)
-  -- self.d_y = self.speed * math.sin(angle)
-  --
-  -- self.x = self.x + (self.d_x * dt)
-  -- self.y = self.y + (self.d_y * dt)
-
   self.y = self.y + (self.fall_speed * dt)
   self.x = self.x - (move_speed * dt)
 

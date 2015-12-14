@@ -31,6 +31,8 @@ function Reindeer:draw()
 end
 
 function Reindeer:update(dt)
+  self.tar_frametime = (player_santa.base_world_speed / player_santa.world_speed)
+
   self.cur_frametime = self.cur_frametime + dt
 
   if self.cur_frametime >= self.tar_frametime then
