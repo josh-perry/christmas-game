@@ -32,10 +32,11 @@ function UI:update_presents_ui(delivered)
     if not delivered then delivered = 0 end
 
     self.present_text = {
-        sx = math.random(1, 2),
-        sy = math.random(1, 2),
         text = delivered
     }
+
+    self.sx = math.random(2, 2)
+    self.sy = math.random(2, 2)
 
     self.r = math.random(-.7, .7)
 end

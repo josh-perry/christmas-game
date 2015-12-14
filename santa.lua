@@ -17,7 +17,7 @@ function Santa:initialize()
   self.screen_speed = 300
 
   self.delivered_presents = 0
-  
+
   self.sprite = love.graphics.newImage("data/graphics/santa.png")
   self.elf = {
       sprite = love.graphics.newImage("data/graphics/elf.png"),
@@ -53,7 +53,7 @@ function Santa:draw()
      ox = self.elf.sprite:getWidth() + 5
   end
 
-  love.graphics.draw(self.elf.sprite, self.screen_space_x + 9, self.screen_space_y + 4, 0, sx, 1, ox)
+  love.graphics.draw(self.elf.sprite, self.screen_space_x + 18, self.screen_space_y + 8, 0, sx, 1, ox)
 
   love.graphics.draw(self.sprite, self.screen_space_x, self.screen_space_y)
 
