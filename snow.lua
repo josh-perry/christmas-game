@@ -3,8 +3,8 @@ local class = require("libs/middleclass/middleclass")
 Snow = class("Snow")
 
 function Snow:initialize(x, y, house_id)
-  self.width = 4
-  self.height = 4
+  self.width = 1
+  self.height = 1
 
   self.x = x
   self.y = y
@@ -25,10 +25,11 @@ end
 function Snow:draw()
   local line_length = (player_santa.world_speed / player_santa.base_world_speed) * 2
 
+  love.graphics.setColor(255, 255, 255)
   love.graphics.rectangle("fill", self.x - (self.width / 2), self.y - (self.width / 2), self.width, self.height)
 
   love.graphics.setColor(255, 255, 255, 100)
-  love.graphics.line(self.x, self.y, self.x + line_length, self.y - line_length)
+  love.graphics.line(self.x, self.y, self.x + line_length, self.y - (line_length / 2))
 end
 
 function Snow:update(dt, move_speed)

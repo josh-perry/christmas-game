@@ -12,7 +12,7 @@ function Santa:initialize()
   self.world_speed = self.base_world_speed -- Pixels/sec
   self.world_deceleration = 32
 
-  self.screen_speed = 600
+  self.screen_speed = 300
 
   self.sprite = love.graphics.newImage("data/graphics/santa.png")
   self.elf = {
